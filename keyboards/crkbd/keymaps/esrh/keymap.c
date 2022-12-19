@@ -28,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      CTRL_ESC,    KC_A,    KC_O,    KC_E,    KC_U,    KC_I,                         KC_D,    KC_H,    KC_T,    KC_N,    KC_S, KC_MINS,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, KC_COLN,    KC_Q,    KC_J,    KC_K,    KC_X,                         KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,  KC_ENT,
+      KC_LSFT, KC_SCLN,    KC_Q,    KC_J,    KC_K,    KC_X,                         KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,  KC_ENT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           MO(1),   KC_BSPC, KC_RALT,     KC_ENT,  KC_SPC, KC_LGUI
                                       //`--------------------------'  `--------------------------'
@@ -62,10 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-  if (!is_keyboard_master()) {
-    return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
-  }
-  return rotation;
+    return is_keyboard_master() ? rotation : OLED_ROTATION_180;
 }
 
 #define L_BASE 0
@@ -123,20 +120,20 @@ void oled_render_keylog(void) {
     oled_write(keylog_str, false);
 }
 
-void render_bootmagic_status(bool status) {
-    /* Show Ctrl-Gui Swap options */
-    static const char PROGMEM logo[][2][3] = {
-        {{0x97, 0x98, 0}, {0xb7, 0xb8, 0}},
-        {{0x95, 0x96, 0}, {0xb5, 0xb6, 0}},
-    };
-    if (status) {
-        oled_write_ln_P(logo[0][0], false);
-        oled_write_ln_P(logo[0][1], false);
-    } else {
-        oled_write_ln_P(logo[1][0], false);
-        oled_write_ln_P(logo[1][1], false);
-    }
-}
+/* void render_bootmagic_status(bool status) { */
+/*     /\* Show Ctrl-Gui Swap options *\/ */
+/*     static const char PROGMEM logo[][2][3] = { */
+/*         {{0x97, 0x98, 0}, {0xb7, 0xb8, 0}}, */
+/*         {{0x95, 0x96, 0}, {0xb5, 0xb6, 0}}, */
+/*     }; */
+/*     if (status) { */
+/*         oled_write_ln_P(logo[0][0], false); */
+/*         oled_write_ln_P(logo[0][1], false); */
+/*     } else { */
+/*         oled_write_ln_P(logo[1][0], false); */
+/*         oled_write_ln_P(logo[1][1], false); */
+/*     } */
+/* } */
 
 void oled_render_logo(void) {
     static const char PROGMEM crkbd_logo[] = {

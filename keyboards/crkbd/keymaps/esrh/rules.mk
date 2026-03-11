@@ -16,5 +16,4 @@ WPM_ENABLE	= yes
 OLED_ENABLE     = yes
 OLED_DRIVER     = ssd1306
 
-SRC += oled_anim.c
 SRC += arasaka_anim.c

@@ -32,5 +32,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_TERM 100
 
 #define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
-#define OLED_FADE_OUT
-#define OLED_TIMEOUT 10000
+#define OLED_TIMEOUT 30000

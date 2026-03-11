@@ -17,8 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
-#include <stdio.h>
-#include "oled_anim.h"
 #include "arasaka_anim.h"
 
 #define CTRL_ESC MT(MOD_LCTL, KC_ESC)
@@ -61,18 +59,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   )
 };
-/* const key_override_t shift_lparen_brace = ko_make_basic(MOD_MASK_SHIFT, KC_LPRN, KC_LBRC); */
-/* const key_override_t shift_rparen_brace = ko_make_basic(MOD_MASK_SHIFT, KC_LPRN, KC_RBRC); */
 
-/* // This globally defines all key overrides to be used */
-/* const key_override_t *key_overrides[] = { */
-/*   &shift_lparen_brace, */
-/*   &shift_rparen_brace */
-/* }; */
+const key_override_t sft_lparen = ko_make_basic(MOD_MASK_SHIFT, KC_LPRN, KC_LCBR);
+const key_override_t sft_rparen = ko_make_basic(MOD_MASK_SHIFT, KC_RPRN, KC_RCBR);
+
+// This globally defines all key overrides to be used
+const key_override_t *key_overrides[] = {
+  &sft_lparen,
+  &sft_rparen
+};
 
 #ifdef OLED_ENABLE
-oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-  return is_keyboard_master() ? rotation : OLED_ROTATION_90;
+oled_rotation_t oled_init_user(oled_rotation_t _) {
+  return OLED_ROTATION_270;
+  return is_keyboard_master() ? OLED_ROTATION_270 : OLED_ROTATION_270;
 }
 
 bool oled_task_user(void) {
@@ -83,12 +83,8 @@ bool oled_task_user(void) {
 
   oled_on();
 
-  if (is_keyboard_master()) {
-    render_anim();
-    oled_set_cursor(0, 0);
-
-    oled_write_P(PSTR("WPM: "), false);
-    oled_write(get_u8_str(get_current_wpm(), '0'), false);
+  if (!is_keyboard_master()) {
+    arasaka_render_logo_anim();
   } else {
     arasaka_render_text_anim();
   }

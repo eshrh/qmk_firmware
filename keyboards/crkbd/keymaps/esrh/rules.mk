@@ -1,6 +1,20 @@
-MOUSEKEY_ENABLE = no    # Mouse keys
+LTO_ENABLE      = yes
+
+MOUSEKEY_ENABLE = no
 RGBLIGHT_ENABLE = no
+CONSOLE_ENABLE = no
+COMMAND_ENABLE = no
+EXTRAKEY_ENABLE = no
+GRAVE_ESC_ENABLE = no
+MAGIC_ENABLE = no
+MUSIC_ENABLE = no
+BOOTMAGIC_ENABLE = no
+SPACE_CADET_ENABLE = no
+
+KEY_OVERRIDE_ENABLE = yes
+WPM_ENABLE	= yes
 OLED_ENABLE     = yes
 OLED_DRIVER     = ssd1306
-LTO_ENABLE      = yes
-WPM_ENABLE	= yes
+
+SRC += oled_anim.c
+SRC += arasaka_anim.c

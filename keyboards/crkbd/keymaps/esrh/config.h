@@ -20,16 +20,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-//#define USE_MATRIX_I2C
-
-/* Select hand configuration */
+#undef LOCKING_SUPPORT_ENABLE
+#undef LOCKING_RESYNC_ENABLE
+#define NO_ACTION_ONESHOT
+#define NO_MUSIC_MODE
+#define LAYER_STATE_8BIT
 
 #define MASTER_LEFT
-// #define MASTER_RIGHT
-// #define EE_HANDS
 
 #define TAPPING_FORCE_HOLD
 #define TAPPING_TERM 100
 
 #define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
 #define OLED_FADE_OUT
+#define OLED_TIMEOUT 10000
